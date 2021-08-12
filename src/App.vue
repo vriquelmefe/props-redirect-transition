@@ -21,13 +21,12 @@
                 <!-- REEMPLAZAR CON ELEMENTO ROUTER LINK A RUTA ESTÁTICA -->
                 <router-link to="/post/1">Ultimo post</router-link> |
               </li>
-              <li class="nav-item" role="presentation"> <router-link :to="{name: 'administrador'}">Administrador</router-link></li>
             </ul>
         </div>
       </div>
     </nav>
     <!-- ROUTER VIEW QUE CARGARÁ LAS VISTAS (INICIO, SOBRE MÍ, CONTACTO, ETC.) -->
-    <transition name="mi-transition">
+    <transition name="mi-transition" mode="out-in">
       <router-view></router-view>
     </transition>
   </div>
@@ -47,7 +46,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;  
 }
 #menu-v8 a{
   text-shadow: 1px 1px #000;

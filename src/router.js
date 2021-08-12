@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Administrador from './components/Administrador.vue'
+import AdministradorSimple from './components/AdministradorSimple.vue'
+import AdministradorAvanzado from './components/AdministradorAvanzado.vue'
 const lazyLoadingInicio = () => import('./components/Inicio')
 const lazyLoadingContacto = () => import('./components/Contacto')
 const lazyLoadingSobreMi = () => import('./components/SobreMi')
-const lazyLoadingArticulo = () => import('./components/Articulo')
+const lazyLoadingPost = () => import('./components/Post')
 
 
 Vue.use(Router)
@@ -45,13 +48,13 @@ export default new Router({
       alias: ['/acerca']        
     },
     {
-      path: '/post/:entrada',
-      component: () => import('./components/Post'),
+      path: '/post',
+      component: lazyLoadingPost,
       name: 'post', 
       children: [
         {
-          path: '/articulo',
-          component: lazyLoadingArticulo,
+          path: ':articulo',
+          component: () => import('./components/Articulo'),
           name: 'articulo',      
         },
       ]     
@@ -59,17 +62,15 @@ export default new Router({
     {
       path: '/administrador',
       name: 'administrador',
-      component: () => import('./components/Administrador'),
+      component: Administrador,
       children: [
           {
-              path: '/*simple',
-              name: 'administrador-simple',
-              component: () => import('./components/AdministradorSimple')
+              path: 'simple',
+              component: AdministradorSimple
           },
           {
-              path: '/*avanzado',
-              name: 'administrador-avanzado',
-              component: () => import('./components/AdministradorAvanzado')
+              path: 'avanzado',
+              component: AdministradorAvanzado
           },
       ]
     },
